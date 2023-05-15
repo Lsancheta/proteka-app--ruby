@@ -1,0 +1,6 @@
+<h1>Detalhes Postos </h1>
+<%= form_with model: @posto, url: postos_path do |f| %>
+    <% f.label :Posto%>
+    <% f.text_field :cliente%>
+<% end %>
+<%= link_to "Voltar", :back%>

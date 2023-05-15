@@ -1,0 +1,14 @@
+<h1>Página de Postos </h1>
+<%= link_to "Criar Novo Posto", new_posto_path %>
+<br>
+<ul>
+    <% @posto.each do |posto| %>
+        <li>
+            <%= posto.cliente%>
+            <%= link_to "Editar", edit_posto_path(posto) %>
+            <%= link_to "Excluir", posto_path(posto), method: :delete, data:{confirm: "Certeza?"}%>
+        </li>
+        <br>
+    <% end %>
+</ul>
+<%= link_to "Voltar", :back%>

@@ -1,0 +1,14 @@
+<h1>Novo Roteiro</h1>
+
+<%= form_with model: @roteiro, url: roteiros_path do |form| %>
+  <%= form.label :nome %>
+  <%= form.text_field :nome %>
+
+  <%= form.label :usuario_id %>
+  <%= form.collection_select(:usuario_id, @usuarios, :id, :nome, prompt: true) %>
+
+  <%= form.label :posto_id %>
+  <%= form.collection_select(:posto_id, @postos, :id, :cliente, promt: true) %>
+
+  <%= form.submit %>
+<% end %>

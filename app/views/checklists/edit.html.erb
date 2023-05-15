@@ -1,0 +1,20 @@
+<h1>Editar Checklist</h1>
+
+<%= form_for @checklist, url: checklist_path(@checklist), method: :patch do |f| %>
+    <%= f.label :Checklist %>
+    <%= f.text_field :name %>
+    <br>
+    <p>Selecione as atividades a serem efetuadas</p>
+    <br>
+    <%= f.label :Tarefas %>
+    <br>
+    <% Tarefa.all.each do |tarefa| %>
+        <%#= f.check_box :tarefa, { multiple :true }, tarefa.id %>
+        <% checked = @checklist.tarefas.include?(tarefa)%>
+        <%= check_box_tag "checklist[tarefa_ids][]", tarefa.id, checked%>
+        <%= tarefa.titulo %><br>
+    <% end %>
+    <br>
+    <%= f.submit "Salvar" %>
+    <%= link_to "Cancelar", :back  %>
+<% end %>

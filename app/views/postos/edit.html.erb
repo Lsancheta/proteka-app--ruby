@@ -1,0 +1,14 @@
+<h1>Editar Posto</h1>
+
+<%= form_for @posto, url: posto_path(@posto), method: :patch do |f| %>
+<%= f.label :cliente%>
+<%= f.text_field :cliente %>
+<br>
+<%= f.label :checklist_id %>
+<%= f.collection_select :checklist_ids, Checklist.all, :id, :name, {}%>
+<br>
+<br>
+
+<%= f.submit "Salvar" %>
+<%= link_to "Cancelar", :back %>
+<% end %>

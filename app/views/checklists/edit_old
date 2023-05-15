@@ -1,0 +1,46 @@
+<h1> Editar Checklist <h1>
+<%= form_for @checklist do |f| %>
+    <div class="form-group">
+        <%= f.label :titulo %>
+        <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+        <p> Selecione quais tarefas irá editar! </p>
+    <%= form_with @tarefa, url: tarefas_path do |t|%>
+        <% @tarefas.each do |tarefa| %>
+        <div class="form-check">
+            <%= t.label :tarefa %>
+            <%= t.check_box_tag "checklist[tarefa_ids]", tarefa.id, @checklist.tarefas.include?(tarefa) %>
+            <%= t.label_tag "checklist[tarefa_ids][]", tarefa.titulo, class:"form-check-label" %>
+        </div>
+        <%end%>
+    <%end%>
+    </div>
+    <%= f.submit "Atualizar Checklist", class:"btn btn-primary" %>
+<%end%>
+<%= link_to "Cancelar", :back %>
+
+
+
+chat gpt
+
+<h1>Editar Checklist</h1>
+
+<%= form_for @checklist do |f| %>
+  <div class="form-group">
+    <%= f.label :titulo %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <p>Selecione quais tarefas irá realizar! </p>
+    <%= f.collection_check_boxes :tarefa_ids, @tarefas, :id, :titulo do |b| %>
+      <%= b.check_box(class: 'form-check-input') %>
+      <%= b.label(class: 'form-check-label') %>
+    <% end %>
+  </div>
+
+  <%= f.submit "Atualizar Checklist", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "Cancelar", :back %>

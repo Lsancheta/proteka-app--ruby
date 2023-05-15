@@ -1,0 +1,14 @@
+<h1>Cadastro de Usuarios</h1>
+<%= form_with model: @usuario, url: usuarios_path do |f| %>
+    <%= f.label :nome%>
+    <%= f.text_field :nome%>
+    <br>
+    <%= f.label :re %>
+    <%= f.text_field :re %>
+    <br>
+    <%= f.label :senha %>
+    <%= f.password_field :senha %>
+    <br>
+    <%= f.submit "Criar Usuario" %>
+<%end%>
+<%= link_to "Cancelar", :back %>

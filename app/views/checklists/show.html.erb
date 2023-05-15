@@ -1,0 +1,11 @@
+<h1>Detalhes Checklist <h1>
+<%= form_with model: @checklist, url: checklists_path do |f| %>
+    <% f.label :name %>
+    <% f.text_field :name %>
+
+    <%= form_with model: @tarefa, url: tarefa_path do |t| %>
+        <%t.label :titulo %>
+        <% t.text_field :titulo %>
+    <% end %>
+<% end %>
+<%link_to "Voltar", :back %>

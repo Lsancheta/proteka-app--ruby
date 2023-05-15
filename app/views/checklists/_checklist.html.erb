@@ -1,0 +1,13 @@
+<div id="<%= dom_id checklist %>">
+<ul>
+  <% @checklist.each do |checklist| %>
+  <li>
+    <%= checklist.name%>
+    
+  </li>
+</ul>
+  <p>
+    <strong>Titulo:</strong>
+    <%= checklist.name %>
+  </p>
+</div>

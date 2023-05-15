@@ -1,0 +1,49 @@
+new ruby create method
+
+def create
+        @checklist = Checklist.new(checklist_params)
+        @tarefas = Tarefa.all
+        tarefa_ids = params[:checklist][:tarefa_ids]
+        #tarefa_ids_array = tarefa_ids.split(",").map(&:to_i)
+
+        #if params[:tarefa_ids].blank?
+        #  flash[:error] = "É NECESSÁRIO ESCOLHER PELO MENOS UMA TAREFA"
+        #  render :new and return
+        #end
+        
+        if @checklist.save
+          @tarefas.each do |tarefa_ids|
+            if tarefa_ids.present?
+              @checklist.checklist_tarefas.create(tarefa_id: tarefa_id)
+            end
+          end
+          
+          redirect_to checklists_path, notice: "CHECKLIST CRIADO COM SUCESSO"
+        else
+          flash[:alert] = "OCORREU UM ERRO AO CRIAR O CHECKLIST, POR FAVOR TENTE NOVAMENTE"
+          render :new
+        end
+      end
+-----------------------
+
+if @checklist.tarefas.empty?
+  flash[:error] = "É NECESSÁRIO ESCOLHER PELO MENOS UMA TAREFA"
+  render :new
+end
+
+if @checklist.save
+#[:tarefa_ids].each.split.map(&:to_i) - logo após o [:checklist]
+  params[:checklist] do |tarefa_id|
+      if tarefa_id.present?
+          @checklist.checklist_tarefas.create(tarefa_id: tarefa_id)
+      end
+  redirect_to checklists_path, notice: "CHECKLIST CRIADO COM SUCESSO"
+end
+
+if @checklist.save
+  redirect_to checklists_path, notice: "Checklist criado com sucesso!"
+else
+  render 'new'
+end
+end
+end

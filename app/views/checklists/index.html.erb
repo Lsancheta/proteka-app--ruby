@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+<h1>Checklists</h1>
+<%= link_to "Criar novo Checklist", new_checklist_path %>
+<br>
+<ul>
+  <% @checklist.each do |checklist| %>
+    <li>
+      <%= checklist.name %>
+      <%= link_to "Editar", edit_checklist_path(checklist) %>
+      <%= link_to "Excluir", checklist_path(checklist), method: :delete, data:{confirm: "Você tem certeza de que quer apagar?"}%>
+    </li>
+    <br>
+  <% end %>
+</ul>
+<%= link_to "Voltar", :back %>

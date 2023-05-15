@@ -1,0 +1,11 @@
+<h1> Cadastro de Postos</h1>
+<%= form_with model: @posto, url: postos_path do |f| %>
+    <%= f.label :Posto%>
+    <%= f.text_field :cliente%>
+    <br>
+    <%= f.label :checklist_id %>
+    <%= f.collection_select :checklist_ids, Checklist.all, :id, :name, prompt: true %>
+    <br><br>
+    <%= f.submit "Criar Posto" %>
+<% end %>
+<%= link_to "Cancelar", :back %>

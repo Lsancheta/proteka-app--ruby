@@ -1,0 +1,14 @@
+<h1>Editar Roteiro</h1>
+
+<%= form_for @roteiro, url: posto_path(@roteiro), method: :patch do |form| %>
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+
+    <%= form.label :posto_id %>
+    <%= form.collection_select :posto_id, Posto.all, :id, :cliente, selected: @posto.id %>
+
+    <%= form.label :usuario_ids %>
+    <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { selected: @roteiro.usuario_id }, { multiple: true } %>
+
+    <%= form.submit %>
+<% end %>

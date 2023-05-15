@@ -1,0 +1,15 @@
+<h1>Página de Usuários</h1>
+<%= link_to "Criar novo Usuario", new_usuario_path%>
+<br>
+<ul>
+    <% @usuario.each do |usuario| %>
+        <li>
+            <%= link_to usuario.nome, usuario_path(usuario) %>
+            <%= link_to "Editar", edit_usuario_path(usuario)%>
+            <%= link_to "Excluir", usuario_path(usuario), method: :delete, data:{confirm: "Tem certeza de que quer apagar o usuário?"} %>
+        </li>
+        <br>
+    <% end %>
+</ul>
+<%= link_to "Voltar", :back %>
+
