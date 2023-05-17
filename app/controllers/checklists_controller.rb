@@ -55,12 +55,17 @@ class ChecklistsController < ApplicationController
     def destroy
         @checklist = Checklist.find(params[:id])
         #@checklist_tarefas = checklist_tarefas.find(params[:checklist_tarefas])
-
-        @checklist.destroy
+        ActiveRecord::Base.transaction do
+          @checklist.checklist_tarefas.destroy_all 
+          @checklist.destroy
 
         redirect_to checklists_path, notice:"Checklist deletado com sucesso"
     end
-    
+
+  rescue ActiveRecord::InvalidForeignKey
+    redirect_to checklists_path, alert: "Não pode se excluído por conta da associação ao banco de dados"
+  end
+
     private
     def checklist_params
         params.require(:checklist).permit(:name, tarefa_ids: [])

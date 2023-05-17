@@ -10,5 +10,15 @@
   <%= form.label :posto_id %>
   <%= form.collection_select(:posto_id, @postos, :id, :cliente, promt: true) %>
 
+  <div id="usuarios">
+    <%= form.fields_for :usuarios do |usuario_form| %>
+      <%= render 'usuario_fields', f: usuario_form %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= link_to_add_fields 'Add User', roteiros_path, 'usuarios' do |f| %>
+      <%= render 'usuario_fields', f: f %>
+    <% end %>
+  </div>
   <%= form.submit %>
 <% end %>

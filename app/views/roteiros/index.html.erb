@@ -1,6 +1,6 @@
 <h1>Roteiros</h1>
 <div>
-<%= link_to "Criar Roteiro", new_roteiro_path %>
+<%= link_to "Novo Roteiro", new_roteiro_path %>
 </div>
 <table>
     <thead>
@@ -17,7 +17,7 @@
                 <td><%= roteiro.posto.cliente %></td>
                 <td><%# roteiro.usuarios.name%></td>
                 <td><%= link_to "Editar", edit_roteiro_path(roteiro) %></td>
-                <td>Apagar</td>
+                <td><%= link_to 'Deletar', roteiro, method: :delete, data: {confirm: 'Tem certeza que quer excluir o roteiro?' }%></td>
             <tr>
         <% end %>
     </tbody>

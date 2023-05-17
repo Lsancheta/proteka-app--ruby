@@ -8,14 +8,17 @@
     
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="httos://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
 
   <body>
   <header>
     <%= link_to "Home", root_path%>
+    <p style="color: green"><%= notice %></p>
   </header>
     <%= yield %>
 
     <footer></footer>
+    <script src="/assets/notice.js"></script>
   </body>
 </html>

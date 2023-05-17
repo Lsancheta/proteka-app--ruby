@@ -1,14 +1,22 @@
-<h1>Página de Postos </h1>
+<h1>Postos </h1>
 <%= link_to "Criar Novo Posto", new_posto_path %>
+<table>
+    <thead>
+        <tr>
+            <th>Postos</th>
+            <th>Opções</th>
+    </thead>
+    <tbody>
+        <% @posto.each do |posto| %>
+        <tr>
+            <td><%= posto.cliente%></td>
+            <td>
+                <%= link_to "Editar", edit_posto_path(posto) %>
+                <%= link_to "Excluir", posto_path(posto), method: :delete, data:{confirm: "Você tem certeza de querer excluir esse posto?"}%>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
 <br>
-<ul>
-    <% @posto.each do |posto| %>
-        <li>
-            <%= posto.cliente%>
-            <%= link_to "Editar", edit_posto_path(posto) %>
-            <%= link_to "Excluir", posto_path(posto), method: :delete, data:{confirm: "Certeza?"}%>
-        </li>
-        <br>
-    <% end %>
-</ul>
 <%= link_to "Voltar", :back%>

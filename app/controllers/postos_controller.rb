@@ -50,11 +50,17 @@ class PostosController < ApplicationController
   end
     
   def destroy
-    puts "Esse e o params[:id]: #{params[:id]}"
+    #puts "Esse e o params[:id]: #{params[:id]}"
     @posto = Posto.find(params[:id])
-    @posto.destroy
+    #esse codigo abaixo vai fazer uma disassociação com a tabela roteiros
+    @posto.roteiros.clear
 
-    redirect_to postos_path, notice:"Posto deletado com sucesso!"
+
+    if @posto.destroy
+      redirect_to postos_path, notice:"Posto deletado com sucesso!"
+    else
+      redirect_to postos_path, notice: "Erro ao deletar o Posto!"
+    end
   end
 
   private

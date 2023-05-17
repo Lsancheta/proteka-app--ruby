@@ -1,14 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Tarefas</h1>
+<%= link_to 'Nova Tarefa', new_tarefa_path %>
 
-<div id="tarefas">
-  <% @tarefas.each do |tarefa| %>
-    <%= render tarefa %>
-    <p>
-      <%= link_to "Show this tarefa", tarefa %>
-    </p>
-  <% end %>
-</div>
+<table>
+  <thead>
+    <tr>
+      <th>Tarefas</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tarefas.each do |tarefa| %>
+      <tr>
+        <td><%= tarefa.titulo %></td>
+        <td>
+          <%= link_to 'Editar', edit_tarefa_path(tarefa) %>
+          <%= link_to 'Deletar', tarefa_path(tarefa), method: :delete, data: { confirm: 'Você tem certeza de querer excluir essa tarefa?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<%= link_to "New tarefa", new_tarefa_path %>
