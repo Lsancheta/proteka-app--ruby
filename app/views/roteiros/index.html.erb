@@ -13,9 +13,8 @@
     <tbody>
         <% @roteiros.each do |roteiro| %>
             <tr>
-                <td><%= roteiro.nome %><% @roteiro %></td>
+                <td><%= roteiro.nome %><% roteiro.inspect %></td>
                 <td><%= roteiro.posto.cliente %></td>
-                <td><%# roteiro.usuarios.name%></td>
                 <td><%= link_to "Editar", edit_roteiro_path(roteiro) %></td>
                 <td><%= link_to 'Deletar', roteiro, method: :delete, data: {confirm: 'Tem certeza que quer excluir o roteiro?' }%></td>
             <tr>

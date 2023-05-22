@@ -10,18 +10,12 @@ class RoteirosController < ApplicationController
       @usuarios = Usuario.all
       @postos = Posto.all
       @roteiro.usuarios.build #build a new associated usuarios
-      #@usuarios = Usuario.joins(:roteiros).select(:id, :nome).distinct
-      #@postos = Posto.joins(:roteiros).select(:id, :cliente).distinct
     end
   
     def create
       @roteiro = Roteiro.new(roteiro_params)
-      @usuario = Usuario.find(roteiro_params[:usuario_id])
-      #@usuario = Usuario.find(params[:roteiro][:usuario_id])
       @posto = Posto.find(params[:roteiro][:posto_id])
-
-      #@roteiro.usuario = @usuario
-      #@roteiro.posto = @posto
+      @roteiro.usuarios = Usuario.where(id: params[:roteiro][:usuario_ids])
 
       if @roteiro.save
         redirect_to roteiros_path, notice: "Roteiro criado com sucesso!"
@@ -65,7 +59,7 @@ class RoteirosController < ApplicationController
     private
   
     def roteiro_params
-      params.require(:roteiro).permit(:nome, :usuario_id, :posto_id)
+      params.require(:roteiro).permit(:nome, :posto_id, usuario_ids:[])
     end
   end
   

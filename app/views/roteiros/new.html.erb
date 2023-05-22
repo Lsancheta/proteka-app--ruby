@@ -4,21 +4,12 @@
   <%= form.label :nome %>
   <%= form.text_field :nome %>
 
-  <%= form.label :usuario_id %>
-  <%= form.collection_select(:usuario_id, @usuarios, :id, :nome, prompt: true) %>
+  <%= form.label :usuario_ids %>
+  <%= form.collection_select(:usuario_ids, @usuarios, :id, :nome,{prompt: "Selecione o usuario"}, {multiple: true}) %>
 
-  <%= form.label :posto_id %>
-  <%= form.collection_select(:posto_id, @postos, :id, :cliente, promt: true) %>
+  <%= form.label :posto_ids %>
+  <%= form.collection_select(:posto_id, @postos, :id, :cliente, {prompt: "Selecione o Posto", include_blank: false }) %>
 
-  <div id="usuarios">
-    <%= form.fields_for :usuarios do |usuario_form| %>
-      <%= render 'usuario_fields', f: usuario_form %>
-    <% end %>
-  </div>
-  <div class="actions">
-    <%= link_to_add_fields 'Add User', roteiros_path, 'usuarios' do |f| %>
-      <%= render 'usuario_fields', f: f %>
-    <% end %>
-  </div>
+ 
   <%= form.submit %>
 <% end %>

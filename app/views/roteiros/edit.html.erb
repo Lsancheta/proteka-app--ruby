@@ -8,7 +8,7 @@
     <%= form.collection_select :posto_id, Posto.all, :id, :cliente, selected: @posto.id %>
 
     <%= form.label :usuario_ids %>
-    <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { selected: @roteiro.usuario_id }, { multiple: true } %>
+    <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { selected: @roteiro.usuario_ids }, { multiple: true } %>
 
     <%= form.submit %>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_190906) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_19_201014) do
   create_table "checklist_tarefas", force: :cascade do |t|
     t.integer "checklist_id", null: false
     t.integer "tarefa_id", null: false
@@ -34,6 +34,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_190906) do
   create_table "checklists_tarefas", id: false, force: :cascade do |t|
     t.integer "checklist_id", null: false
     t.integer "tarefa_id", null: false
+  end
+
+  create_table "joins_table_r_oteiros_postos", force: :cascade do |t|
+    t.string "roteiros"
+    t.string "postos"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posto_checklists", force: :cascade do |t|
@@ -64,15 +71,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_190906) do
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "posto_id", null: false
-    t.integer "usuario_id", null: false
+    t.integer "posto_id"
     t.index ["posto_id"], name: "index_roteiros_on_posto_id"
-    t.index ["usuario_id"], name: "index_roteiros_on_usuario_id"
   end
 
   create_table "roteiros_usuarios", id: false, force: :cascade do |t|
-    t.integer "usuario_id", null: false
     t.integer "roteiro_id", null: false
+    t.integer "usuario_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["roteiro_id", "usuario_id"], name: "index_roteiros_usuarios_on_roteiro_id_and_usuario_id", unique: true
+    t.index ["roteiro_id"], name: "index_roteiros_usuarios_on_roteiro_id"
+    t.index ["usuario_id"], name: "index_roteiros_usuarios_on_usuario_id"
   end
 
   create_table "tarefas", force: :cascade do |t|
@@ -97,5 +107,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_190906) do
   add_foreign_key "postos", "checklists"
   add_foreign_key "postos", "usuarios"
   add_foreign_key "roteiros", "postos"
-  add_foreign_key "roteiros", "usuarios"
+  add_foreign_key "roteiros_usuarios", "roteiros"
+  add_foreign_key "roteiros_usuarios", "usuarios"
 end
