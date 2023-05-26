@@ -65,6 +65,6 @@ class PostosController < ApplicationController
 
   private
   def posto_params
-    params.require(:posto).permit(:cliente, :checklist_id)
+    params.require(:posto).permit(:cliente, :checklist_ids)
   end
 end
