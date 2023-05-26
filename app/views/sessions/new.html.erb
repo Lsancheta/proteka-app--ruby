@@ -1,0 +1,15 @@
+<%= form_for :session, url: :sign_in do |f| %>
+    <div class = "field">
+        <%= f.label :re %><br />
+        <%= f.text_field :re, autofocus: true %>
+    </div>
+
+    <div class = "field">
+        <%= f.label :senha %><br/>
+        <%= f.password_field :senha, autocomplete: "off" %>
+    </div>
+
+    <div class = "actions">
+        <%= f.submit "ENTRAR" %>
+    </div>
+<% end %>
