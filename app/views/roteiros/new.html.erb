@@ -3,13 +3,13 @@
 <%= form_with model: @roteiro, url: roteiros_path do |form| %>
   <%= form.label :nome %>
   <%= form.text_field :nome %>
-
-  <%= form.label :usuario_ids %>
-  <%= form.collection_select(:usuario_ids, @usuarios, :id, :nome,{prompt: "Selecione o usuario"}, {multiple: true}) %>
-
-  <%= form.label :posto_ids %>
-  <%= form.collection_select(:posto_id, @postos, :id, :cliente, {prompt: "Selecione o Posto", include_blank: false }) %>
-
- 
+<br>
+  <p><%= form.label :usuario %></p>
+  <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { include_hidden: false},  multiple: true  %>
+ <br> 
+  <p><%= form.label :posto %></p>
+  <%= form.collection_select(:posto_id, @postos, :id, :cliente, {prompt: "Selecione o Posto"}) %>
+<br>
+ <br>
   <%= form.submit %>
 <% end %>

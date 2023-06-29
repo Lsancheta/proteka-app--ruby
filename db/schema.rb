@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_205117) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_150015) do
   create_table "checklist_tarefas", force: :cascade do |t|
     t.integer "checklist_id", null: false
     t.integer "tarefa_id", null: false
@@ -96,11 +96,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_205117) do
   create_table "usuarios", force: :cascade do |t|
     t.string "nome"
     t.integer "re"
-    t.string "senha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "password"
+    t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["re"], name: "index_usuarios_on_re", unique: true
+    t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
   end
 
   add_foreign_key "checklist_tarefas", "checklists"

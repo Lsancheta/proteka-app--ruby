@@ -1,14 +1,25 @@
 <h1>Editar</h1>
 <%= form_for @usuario, url: usuario_path(@usuario), metho: :patch do |f| %>
-    <%= f.label :nome%>
-    <%= f.text_field :nome %>
-    <br>
-    <%= f.label :re%>
-    <%= f.text_field :re %>
-    <br>
-    <%= f.label :senha%>
-    <%= f.password_field :senha %>
+    <div class="field">
+        <%= f.label :nome %><br>
+        <%= f.text_field :nome %>
+    </div>
 
+    <div class="field">
+        <%= f.label :email %><br>
+        <%= f.email_field :email %>
+    </div>
+
+    <div class="field">
+        <%= f.label :re %><br>
+        <%= f.text_field :re %>
+        
+    </div>
+    
+    <div class="field">
+        <%= f.label :senha %><br>
+        <%= f.password_field :password %>
+    </div>
     <Br>
     <%= f.submit "Salvar" %>
     <%= link_to "Cancelar", :back %>

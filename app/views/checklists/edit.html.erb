@@ -9,7 +9,6 @@
     <%= f.label :Tarefas %>
     <br>
     <% Tarefa.all.each do |tarefa| %>
-        <%#= f.check_box :tarefa, { multiple :true }, tarefa.id %>
         <% checked = @checklist.tarefas.include?(tarefa)%>
         <%= check_box_tag "checklist[tarefa_ids][]", tarefa.id, checked%>
         <%= tarefa.titulo %><br>
