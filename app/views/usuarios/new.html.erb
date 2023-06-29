@@ -1,14 +1,24 @@
 <h1>Cadastro de Usuarios</h1>
 <%= form_with model: @usuario, url: usuarios_path do |f| %>
-    <%= f.label :nome%>
-    <%= f.text_field :nome%>
-    <br>
-    <%= f.label :re %>
-    <%= f.text_field :re %>
-    <br>
-    <%= f.label :senha %>
-    <%= f.password_field :senha %>
-    <br>
+    <div class="field">
+        <%= f.label :nome %><br>
+        <%= f.text_field :nome %>
+    </div>
+    
+     <div class="field">
+        <%= f.label :email %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+        <%= f.label :re %><br>
+        <%= f.text_field :re %>
+    </div>
+    
+    <div class="field">
+        <%= f.label :password %><br>
+        <%= f.password_field :password %>
+    </div>
     <%= f.submit "Criar Usuario" %>
 <%end%>
 <%= link_to "Cancelar", :back %>

@@ -1,5 +1,4 @@
 class TarefasController < ApplicationController
-  before_action :set_tarefa, only: %i[ show edit update destroy ]
 
   # GET /tarefas or /tarefas.json
   def index
@@ -8,6 +7,7 @@ class TarefasController < ApplicationController
 
   # GET /tarefas/1 or /tarefas/1.json
   def show
+    @tarefa = Tarefa.find(params[:id])
   end
 
   # GET /tarefas/new
@@ -17,6 +17,7 @@ class TarefasController < ApplicationController
 
   # GET /tarefas/1/edit
   def edit
+    @tarefa = Tarefa.find(params[:id])
   end
 
   # POST /tarefas or /tarefas.json
@@ -36,6 +37,7 @@ class TarefasController < ApplicationController
 
   # PATCH/PUT /tarefas/1 or /tarefas/1.json
   def update
+    @tarefa = Tarefa.find(params[:id])
     respond_to do |format|
       if @tarefa.update(tarefa_params)
         format.html { redirect_to tarefa_url(@tarefa), notice: "Tarefa was successfully updated." }
@@ -49,6 +51,7 @@ class TarefasController < ApplicationController
 
   # DELETE /tarefas/1 or /tarefas/1.json
   def destroy
+    @tarefa = Tarefa.find(params[:id])
     @tarefa.destroy
 
     respond_to do |format|

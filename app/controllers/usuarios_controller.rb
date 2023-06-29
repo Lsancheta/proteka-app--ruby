@@ -15,8 +15,10 @@ class UsuariosController < ApplicationController
     @usuario = Usuario.new(usuario_params)
 
     if @usuario.save
-      redirect_to usuarios_path, notice: "Usuario Cadastrado com Sucesso"
+      redirect_to usuarios_path, notice: "Usuário Cadastrado com Sucesso"
     else
+      puts @usuario.errors.full_messages
+      flash.now[:alert] = "Erro ao cadastrar usuário!"
       render 'new'
     end
   end
@@ -43,6 +45,6 @@ class UsuariosController < ApplicationController
 
   private
   def usuario_params
-    params.require(:usuario).permit(:re, :senha, :nome)
+    params.require(:usuario).permit(:re, :nome, :email, :password)
   end
 end
