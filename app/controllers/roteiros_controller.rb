@@ -34,6 +34,9 @@ class RoteirosController < ApplicationController
 
     def update
       @roteiro = Roteiro.find(params[:id])
+      #adicionar os ids previamente selecionados
+      params[:roteiro][:usuario_ids] ||= []
+      params[:roteiro][:usuario_ids] += @roteiro.usuario_ids.map(&:to_s)
 
       if @roteiro.update(roteiro_params)
         redirect_to roteiros_path, notice: "Roteiro Editado com sucesso!!"
