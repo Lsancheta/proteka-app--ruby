@@ -5,7 +5,7 @@
   <%= form.text_field :nome %>
 <br>
   <p><%= form.label :usuario %></p>
-  <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { include_hidden: false},  multiple: true  %>
+  <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { include_hidden: false},  {multiple: true}  %>
  <br> 
   <p><%= form.label :posto %></p>
   <%= form.collection_select(:posto_id, @postos, :id, :cliente, {prompt: "Selecione o Posto"}) %>
