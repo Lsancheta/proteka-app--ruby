@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_150015) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_30_202425) do
   create_table "checklist_tarefas", force: :cascade do |t|
     t.integer "checklist_id", null: false
     t.integer "tarefa_id", null: false
@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_150015) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "password"
+    t.string "token"
     t.index ["email"], name: "index_usuarios_on_email", unique: true
     t.index ["re"], name: "index_usuarios_on_re", unique: true
     t.index ["reset_password_token"], name: "index_usuarios_on_reset_password_token", unique: true
