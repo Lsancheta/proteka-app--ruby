@@ -1,15 +1,19 @@
-<%= form_for :session, url: :sign_in do |f| %>
-    <div class = "field">
-        <%= f.label :re %><br />
-        <%= f.text_field :re, autofocus: true %>
-    </div>
+<form action="/login" method="post">
+  <!-- Add the CSRF token as a hidden input field -->
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-    <div class = "field">
-        <%= f.label :senha %><br/>
-        <%= f.password_field :senha, autocomplete: "off" %>
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required>
+  </div>
+  <div>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <% if flash[:error] %>
+    <div class="alert alert-danger">
+      <%= flash[:error] %>
     </div>
-
-    <div class = "actions">
-        <%= f.submit "ENTRAR" %>
-    </div>
-<% end %>
+    <% end %>
+  <button type="submit">Login</button>
+</form>

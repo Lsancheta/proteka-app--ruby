@@ -1,4 +1,5 @@
 class TarefasController < ApplicationController
+  before_action :authenticate_user
 
   # GET /tarefas or /tarefas.json
   def index

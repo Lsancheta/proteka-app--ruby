@@ -1,4 +1,5 @@
 class RoteirosController < ApplicationController
+  before_action :authenticate_user
     def index
       @roteiros = Roteiro.all
       @postos = Posto.all
