@@ -13,9 +13,11 @@ class RoteirosController < ApplicationController
     def create
       @roteiro = Roteiro.new(roteiro_params)
       @posto = Posto.find(params[:roteiro][:posto_id])
-      @roteiro.usuarios = Usuario.where(id: params[:roteiro][:usuario_ids].reject!(&:blank?))
+      @roteiro.usuario_ids = params[:roteiro][:usuario_ids].reject!(&:blank?)
+      #@roteiro.usuarios = Usuario.where(id: params[:roteiro][:usuario_ids].reject!(&:blank?))
 
       if @roteiro.save
+        @roteiro.usuarios << Usuario.where(id: params[:roteiro][:usuario_ids])
         redirect_to roteiros_path, notice: "Roteiro criado com sucesso!"
       else
         render :new
@@ -26,13 +28,13 @@ class RoteirosController < ApplicationController
     def edit
       @roteiro = Roteiro.find(params[:id])
       @posto = @roteiro.posto
-      @usuarios = Usuario.all #para ver todos os usuarios
-      @roteiro.usuarios.build #build a new associated usuarios
+      @usuarios_selecionados = @roteiro.usuarios
+      @usuarios_disponiveis = Usuario.where.not(id: @usuarios_selecionados.pluck(:id))
     end
 
     def update
       @roteiro = Roteiro.find(params[:id])
-        
+
       if @roteiro.update(roteiro_params)
         redirect_to roteiros_path, notice: "Roteiro Editado com sucesso!!"
       else

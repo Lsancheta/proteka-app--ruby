@@ -7,8 +7,14 @@
     <%= form.label :posto_id %>
     <%= form.collection_select :posto_id, Posto.all, :id, :cliente, selected: @posto.id %>
 <br>
-    <p><%= form.label :usuario %></p>
-    <%= form.collection_select :usuario_ids, @usuarios, :id, :nome, { selected: @roteiro.usuarios }, { multiple: true } %>
-<br><br>
+    <%= form.label :usuarios_selecionados, "Usuarios Selecionados" %>
+    <%  @usuarios_selecionados.each do |usuario| %>
+    <br>
+        <%= usuario.nome%><br>
+    <% end %>
+<br>
+    <%= form.label :usuarios_disponiveis, "Usuarios Disponíveis" %>
+    <%= form.collection_select :usuario_ids, @usuarios_disponiveis, :id, :nome, {include_hidden: false }, multiple: true, class: 'select2' %>
+<br>
     <%= form.submit %>
 <% end %>
