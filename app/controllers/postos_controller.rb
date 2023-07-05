@@ -1,5 +1,7 @@
 class PostosController < ApplicationController
-  before_action :authenticate_user
+  before_action :require_login
+  helper_method :current_user
+  
   def index
     @posto = Posto.all
   end

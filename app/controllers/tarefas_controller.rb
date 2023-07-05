@@ -1,6 +1,7 @@
 class TarefasController < ApplicationController
-  before_action :authenticate_user
-
+  before_action :require_login
+  helper_method :current_user
+  
   # GET /tarefas or /tarefas.json
   def index
     @tarefas = Tarefa.all

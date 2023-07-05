@@ -1,18 +1,13 @@
-class ApplicationController < ActionController::Base
-    before_action :authenticate_user
+    class ApplicationController < ActionController::Base
+      before_action :require_login
+      helper_method :current_user
 
-    private
+      def require_login
+        redirect_to new_session_path unless session.include? :user_id
+      end
 
-    def authenticate_user
-        unless current_user
-            flash[:notice] = "Faça login para acessar esta página."
-            redirect_to login_path
-        end
-    end
-
-    def current_user
-        @current_user ||= Usuario.find_by(token: session[:token]) #request.headers['Authorization'])
-    end
-
-    helper_method :current_user
-end
+      def current_user
+        @current_user ||= Usuario.find(session[:user_id]) if session[:user_id]
+      end
+      
+    end      
