@@ -1,5 +1,9 @@
 class UsuariosController < ApplicationController
-  before_action :authenticate_user
+  before_action :require_login
+  helper_method :current_user
+  
+
+
   def index
     @usuario = Usuario.all
   end
@@ -47,5 +51,5 @@ class UsuariosController < ApplicationController
   private
   def usuario_params
     params.require(:usuario).permit(:re, :nome, :email, :password)
-  end
+  end  
 end

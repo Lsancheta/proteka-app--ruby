@@ -1,4 +1,6 @@
-<%= link_to 'Logout', '/logout', method: :delete %>
+<%#= content_tag :h1, @current_user.welcome %>
+<%= link_to 'Logout', session_path, method: :delete %>
+<% puts current_user%>
 <h1> Bem vindo ao Proteka App! </h1>
 
 <ul>

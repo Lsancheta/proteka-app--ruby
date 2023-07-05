@@ -1,35 +1,29 @@
-require  'jwt'
-class SessionsController < ApplicationController
 
+class SessionsController < ApplicationController
+  skip_before_action :require_login, only: [:create, :new]
+  
   def new
-    
+    # Renderiza o formulário de login
   end
+
   def create
-    user = Usuario.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
-      token = generate_token(user)
-      user.update(token: token)
+    session_params = params.permit(:email, :password )
+    @user = Usuario.find_by(email: session_params[:email])
+
+    if @user && @user.authenticate(session_params[:password])
+      session[:user_id] = @user.id
       redirect_to root_path
-      puts session[:token]
+      puts @user.id
     else
-      flash.now[:error] = "Senha ou email incorretos"
+      flash[:notice] = "Senha ou email incorretos"
       render :new
     end
   end
 
   def destroy
-    current_user.update(token: nil)
-    redirect_to login_path
+    user = Usuario.find_by(email: params[:email])
+    session[:user_id] = nil
+    flash[:notice] = "You have been signed out!"
+    redirect_to new_session_path
   end
-
-
-  private
-
-  def generate_token(user)
-    payload = {user_id: user.id}
-    secret_key = Rails.application.secrets.secret_key_base
-    algorithm = 'HS256'
-    JWT.encode(payload, secret_key, algorithm) 
-  end
-  
 end
